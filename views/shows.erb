@@ -5,6 +5,6 @@
    <%= show.title %>
    <%= show.year %>
    <%= show.composer  %>
-   <img src="<%= show.img_url %>" alt="<%= show.title %> poster" />
+   <a href="show/<%= show.id %>"><img src="<%= show.img_url %>" alt="<%= show.title %> poster" /></a>
    </div>
    <% end %>
