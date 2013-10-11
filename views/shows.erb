@@ -1,0 +1,10 @@
+<h2>All Shows</h2>
+
+<% @all_shows.each do |show| %>
+   <div class="show">
+   <%= show.title %>
+   <%= show.year %>
+   <%= show.composer  %>
+   <img src="<%= show.img_url %>" alt="<%= show.title %> poster" />
+   </div>
+   <% end %>
