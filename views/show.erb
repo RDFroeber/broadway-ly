@@ -1,1 +1,8 @@
-<h2><%=%></h2>
+<h2><%= @new_show.title %></h2>
+
+<div class="show">
+   <%= @new_show.title %>
+   <%= @new_show.year %>
+   <%= @new_show.composer  %>
+   <a href="show/<%= @new_show.id %>"><img src="<%= @new_show.img_url %>" alt="<%= @new_show.title %> poster" /></a>
+   </div>

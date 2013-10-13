@@ -17,53 +17,58 @@ end
 # Index of all shows
 # with links to individual shows
 get "/shows" do
-   @all_shows = Show.all
+  @all_shows = Show.all
 
-   erb :shows
+  erb :shows
 end
 
 # Form to create new show
 get "/shows/new" do
 
-   erb :add_show
+  erb :add_show
 end
 
 # Create action - new show - redirects to that
 # show
 post "/shows" do
 
-   redirects "/shows/#{id}"
+  @new_show = Show.new(title: "#{params[title]}", year: "#{params[year]}", composer: "#{params[composer]}", img_url: "#{params[img_url]}")
+  @new_show.save
+
+  redirects "/shows/#{@new_show.id}"
+  # redirects "/shows"
 end
 
 # Individual show page
 # Links to list of all songs `/shows/:id/songs`
 # and form to create new songs `/shows/:id/songs/new`
 get "/shows/:id" do
-   
-   erb :show
+
+  erb :show
 end
 
 # Form to create new songs
 get "/shows/:id/songs/new" do
 
-   erb :add_song
+
+  erb :add_song
 end
 
 # Create action - new songs for a show - redirects
 # to that song
 post "/shows/:id/songs" do
 
-   redirects "/shows/#{:show_id}/songs/:#{song_id}"
+  redirects "/shows/#{:show_id}/songs/:#{song_id}"
 end
 
 # Lists all songs from the show
 get "/shows/:id/songs" do
-
-   erb :songs
+  
+  erb :songs
 end
 
 # Shows just one song from the show
 get "/shows/:show_id/songs/:song_id" do
 
-   erb :song
+  erb :song
 end
