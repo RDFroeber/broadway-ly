@@ -4,7 +4,7 @@ require "active_record"
 require_relative "config/environments"
 require_relative "./models/show"
 require_relative "./models/song"
-# require "pry"
+require "pry"
 
 after do
   ActiveRecord::Base.clear_active_connections!
@@ -33,7 +33,7 @@ end
 # show
 post "/shows" do
 
-  @new_show = Show.new(title: "#{params[title]}", year: params[year], composer: "#{params[composer]}", img_url: "#{params[img_url]}")
+  @new_show = Show.new(title: params[:title], year: params[:year].to_i, composer: params[:composer], img_url: params[:img_url])
   @new_show.save
 
   redirects "/shows/#{@new_show.id}"
