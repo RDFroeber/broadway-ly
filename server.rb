@@ -4,6 +4,7 @@ require "active_record"
 require_relative "config/environments"
 require_relative "./models/show"
 require_relative "./models/song"
+# require "pry"
 
 after do
   ActiveRecord::Base.clear_active_connections!
@@ -32,17 +33,17 @@ end
 # show
 post "/shows" do
 
-  @new_show = Show.new(title: "#{params[title]}", year: "#{params[year]}", composer: "#{params[composer]}", img_url: "#{params[img_url]}")
+  @new_show = Show.new(title: "#{params[title]}", year: params[year], composer: "#{params[composer]}", img_url: "#{params[img_url]}")
   @new_show.save
 
   redirects "/shows/#{@new_show.id}"
-  # redirects "/shows"
 end
 
 # Individual show page
 # Links to list of all songs `/shows/:id/songs`
 # and form to create new songs `/shows/:id/songs/new`
 get "/shows/:id" do
+  @a_show = Show.find(params[:id])
 
   erb :show
 end
