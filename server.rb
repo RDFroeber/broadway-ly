@@ -15,8 +15,7 @@ get "/" do
   erb :index
 end
 
-# Index of all shows
-# with links to individual shows
+# Index of all shows with links to individual shows
 get "/shows" do
   @all_shows = Show.all
 
@@ -51,29 +50,29 @@ end
 get "/shows/:id/songs/new" do
   @show_title = Show.all.find_by(id: params[:id]).title
 
-  @new_song = Song.new(title: params[:title], embed_url: params[:embed_url], show_id: params[:id])
-  @new_song.save
-
   erb :add_song
 end
 
-# Create action - new songs for a show - redirects
-# to that song
+# Create action - new songs for a show - redirects to that song
 post "/shows/:id/songs" do
+  @new_song = Song.new(title: params[:title], embed_url: params[:embed_url], show_id: params[:id])
+  @new_song.save
 
-  redirects "/shows/#{:show_id}/songs/:#{song_id}"
+  redirects "/shows/#{params[:id]}/songs/:#{@new_song.id}"
 end
 
 # Lists all songs from the show
 get "/shows/:id/songs" do
   @show_title = Show.all.find_by(id: params[:id]).title
-  
+
   @all_songs = Song.all.where(show_id: params[:id])
   erb :songs
 end
 
 # Shows just one song from the show
 get "/shows/:show_id/songs/:song_id" do
+  @a_show = Show.all.find_by(id: params[:show_id])
+  @song_from_show = @a_show.songs.find_by(id: params[:song_id])
 
   erb :song
 end
