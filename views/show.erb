@@ -4,5 +4,6 @@
    <%= @a_show.title %>
    <%= @a_show.year %>
    <%= @a_show.composer  %>
-   <a href="show/<%= @a_show.id %>"><img src="<%= @a_show.img_url %>" alt="<%= @a_show.title %> poster" /></a>
+   <img src="<%= @a_show.img_url %>" alt="<%= @a_show.title %> poster" />
    </div>
+<a href="/shows/<%= @a_show.id %>/songs/new">Add a new song to this show</a>

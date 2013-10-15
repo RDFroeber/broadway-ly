@@ -29,14 +29,13 @@ get "/shows/new" do
   erb :add_show
 end
 
-# Create action - new show - redirects to that
-# show
+# Create action - new show - redirects to that show
 post "/shows" do
 
   @new_show = Show.new(title: params[:title], year: params[:year].to_i, composer: params[:composer], img_url: params[:img_url])
   @new_show.save
 
-  redirects "/shows/#{@new_show.id}"
+  redirect "/shows/#{@new_show.id}"
 end
 
 # Individual show page
@@ -50,7 +49,10 @@ end
 
 # Form to create new songs
 get "/shows/:id/songs/new" do
+  @show_title = Show.all.find_by(id: params[:id]).title
 
+  @new_song = Song.new(title: params[:title], embed_url: params[:embed_url], show_id: params[:id])
+  @new_song.save
 
   erb :add_song
 end
@@ -64,7 +66,9 @@ end
 
 # Lists all songs from the show
 get "/shows/:id/songs" do
+  @show_title = Show.all.find_by(id: params[:id]).title
   
+  @all_songs = Song.all.where(show_id: params[:id])
   erb :songs
 end
 
