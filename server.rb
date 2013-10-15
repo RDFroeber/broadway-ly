@@ -4,7 +4,7 @@ require "active_record"
 require_relative "config/environments"
 require_relative "./models/show"
 require_relative "./models/song"
-require "pry"
+# require "pry"
 
 after do
   ActiveRecord::Base.clear_active_connections!
@@ -63,9 +63,9 @@ end
 
 # Lists all songs from the show
 get "/shows/:id/songs" do
-  @show_title = Show.all.find_by(id: params[:id]).title
-
-  @all_songs = Song.all.where(show_id: params[:id])
+  @a_show = Show.all.find_by(id: params[:id])
+  @songs_from_show = @a_show.songs
+  
   erb :songs
 end
 

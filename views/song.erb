@@ -1,6 +1,9 @@
 <h2>Song from <%= @a_show.title %></h2>
 
    <div class="song">
-      <%= @song_from_show.title %>
-      <%= @song_from_show.embed_url %>
+      <%= @song_from_show.title %><br />
+
+      <% youtube_id = @song_from_show.embed_url.split("=").last %>
+      <% song_embed = "http://www.youtube.com/embed/#{youtube_id}" %>
+      <iframe type="text/html" width="640" height="390" src="<%= song_embed %>" autoplay=1 frameborder="0" />
    </div>

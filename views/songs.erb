@@ -1,8 +1,10 @@
-<h2>All Songs from <%= @show_title %></h2>
+<h2>All Songs from <%= @a_show.title %></h2>
 
-<% @all_songs.each do |song| %>
+<% @songs_from_show.each do |song| %>
    <div class="song">
-      <%= song.title %>
-      <%= song.embed_url %>
+      <%= song.title %><br />
+      <% youtube_id = song.embed_url.split("=").last %>
+      <% song_embed = "http://www.youtube.com/embed/#{youtube_id}" %>
+      <iframe type="text/html" width="640" height="390" src="<%= song_embed %>" autoplay=1 frameborder="0" />
    </div>
 <% end %>
